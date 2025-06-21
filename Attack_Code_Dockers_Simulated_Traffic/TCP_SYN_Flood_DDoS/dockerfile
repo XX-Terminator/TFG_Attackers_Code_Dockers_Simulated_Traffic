@@ -1,0 +1,17 @@
+# Usa una imagen base de Python (en este caso, la versión 3.9 slim)
+FROM python:3.8.10
+
+# Establece el directorio de trabajo dentro del contenedor
+WORKDIR /app
+
+# Copia el archivo del script MQTT_Connect_Flood.py desde tu máquina local al contenedor
+COPY TCP_SYN_Flood.py /app/TCP_SYN_Flood.py
+
+# Instala las dependencias necesarias
+RUN apt-get update && \
+    apt-get install -y iproute2 iputils-ping tcpdump libpcap-dev && \
+    pip install scapy && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
+
+# Comando para ejecutar el script cuando el contenedor se inicie
+CMD ["python3", "TCP_SYN_Flood.py"]

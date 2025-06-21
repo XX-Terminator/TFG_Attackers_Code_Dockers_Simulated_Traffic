@@ -1,0 +1,14 @@
+# Usa una imagen base de Python (en este caso, la versión 3.9 slim)
+FROM python:3.8.10
+
+# Establece el directorio de trabajo dentro del contenedor
+WORKDIR /app
+
+# Copia el archivo del script MQTT_Connect_Flood.py desde tu máquina local al contenedor
+COPY TCP_ICMP.py /app/TCP_ICMP.py
+
+# Instala las dependencias necesarias
+RUN apt update && apt install -y iputils-ping && pip install scapy
+
+# Comando para ejecutar el script cuando el contenedor se inicie
+CMD ["python3", "TCP_ICMP.py"]

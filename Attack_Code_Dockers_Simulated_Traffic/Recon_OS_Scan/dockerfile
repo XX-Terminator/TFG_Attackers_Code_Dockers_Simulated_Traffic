@@ -1,0 +1,13 @@
+# Usa una imagen base de Python (en este caso, la versión 3.9 slim)
+FROM python:3.8.10
+
+# Establece el directorio de trabajo dentro del contenedor
+WORKDIR /app
+
+RUN pip install scapy
+
+# Copia el archivo del script MQTT_Connect_Flood.py desde tu máquina local al contenedor
+COPY Recon_OS_Scan.py /app/Recon_OS_Scan.py
+
+# Comando para ejecutar el script cuando el contenedor se inicie
+CMD ["python3", "Recon_OS_Scan.py"]
